@@ -5,8 +5,8 @@ const tokenBlacklistModel = require("../models/blacklist.model")
 
 const cookieOptions = {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     maxAge: 24 * 60 * 60 * 1000
 }
 
@@ -107,7 +107,7 @@ const loginUserController = async (req, res) => {
         }
     })
 }
-console.log("NODE_ENV:", process.env.NODE_ENV)
+
 
 /**
  * @name logoutUserController
