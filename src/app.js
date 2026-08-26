@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
-const allowedOrigins = ['http://localhost:5173', 'https://interview-report-generator-ai.onrender.com']
+const allowedOrigins = ['http://localhost:5173', "https://interviewreportgenerator-ai.vercel.app", 'https://interview-report-generator-ai.onrender.com']
 app.use(cors({
     origin: allowedOrigins,
     credentials: true
