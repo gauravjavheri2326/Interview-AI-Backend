@@ -66,13 +66,24 @@ const getInterviewReportByIdController = async (req, res) => {
  */
 
 const getAllInterviewReportsController = async (req, res) => {
-    const interviewReports = await interviewReportModel.find({ user: req.user.id }.sort({ createdAt: -1 })).select("-resume -selfDescription -jobDescription -__v -technicalQuestions  -behavioralQuestions -skillFaps -preparationalPlan")
+    try {
+        const interviewReports = await interviewReportModel
+            .find({ user: req.user.id })
+            .sort({ createdAt: -1 })
+            .select("-resume -selfDescription -jobDescription -__v -technicalQuestions -behavioralQuestions -skillFaps -preparationalPlan")
 
-    res.status(200).json({
-        message: "Interview reports fetched successfully",
-        interviewReports
-    })
+        res.status(200).json({
+            message: "Interview reports fetched successfully",
+            interviewReports
+        })
 
+    } catch (err) {
+        console.log("Get reports error:", err)
+
+        res.status(500).json({
+            message: "Failed to fetch interview reports"
+        })
+    }
 }
 
 
