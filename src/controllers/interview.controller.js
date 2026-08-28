@@ -86,6 +86,33 @@ const getAllInterviewReportsController = async (req, res) => {
     }
 }
 
+/**
+ * @description Controller to delete report from database
+ */
+
+const deleteInterviewReportController = async (req, res) => {
+    try {
+        const { interviewId } = req.params
+        const interviewReport = await interviewReportModel.findOneAndDelete({ _id: interviewId, user: req.user.id })
+
+        if (!interviewReport) {
+            return res.status(404).json({
+                message: "Report didn't exist"
+            })
+        }
+
+        res.status(200).json({
+            message: "Interview report deleted successfully"
+        })
+    } catch (err) {
+        res.status(500).json({
+            message: "Failed to delete interview report"
+        })
+    }
 
 
-module.exports = { generateInterviewReportController, getInterviewReportByIdController, getAllInterviewReportsController }
+}
+
+
+
+module.exports = { generateInterviewReportController, getInterviewReportByIdController, getAllInterviewReportsController, deleteInterviewReportController }
