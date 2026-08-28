@@ -35,6 +35,6 @@ interviewRouter.get("/", authMiddleware.authUser, interviewController.getAllInte
  * @access private
  */
 
-interviewRouter.delete("/report/delete", authMiddleware.authUser, interviewController.deleteInterviewReportController)
+interviewRouter.delete("/report/delete/:interviewId", authMiddleware.authUser, interviewController.deleteInterviewReportController)
 
 module.exports =  interviewRouter
