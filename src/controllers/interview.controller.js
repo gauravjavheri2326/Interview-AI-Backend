@@ -35,8 +35,14 @@ const generateInterviewReportController = async (req, res) => {
             interviewReport
         })
     } catch (err) {
+        if (err.message?.includes("429") || err.message?.includes("RESOURCE_EXHAUSTED")) {
+            return res.status(429).json({
+                message: "AI generation limit reached. Please try again later."
+            })
+        }
+
         res.status(500).json({
-            message: "Failed to generate interview report",
+            message: "Failed to generate interview report"
         })
     }
 }

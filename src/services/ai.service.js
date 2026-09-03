@@ -1,6 +1,5 @@
 const { GoogleGenAI } = require("@google/genai")
 const { z } = require("zod")
-const { zodToJsonSchema } = require("zod-to-json-schema")
 
 
 const ai = new GoogleGenAI({
@@ -60,8 +59,6 @@ async function generateInterviewReport({ resume, selfDescription, jobDescription
     })
 
     const data = JSON.parse(response.text)
-
-    // console.log(JSON.stringify(data, null, 2))
 
     return data
 
