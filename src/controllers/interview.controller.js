@@ -41,6 +41,13 @@ const generateInterviewReportController = async (req, res) => {
             })
         }
 
+        if (err.message?.includes("503") || err.message?.includes("UNAVAILABLE")) {
+            return res.status(503).json({
+                message: "AI service is temporarily busy. Please try again in a moment."
+            })
+        }
+
+
         res.status(500).json({
             message: "Failed to generate interview report"
         })
